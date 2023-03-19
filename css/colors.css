@@ -1,0 +1,23 @@
+body {
+    background-image: url("taustakuva.png");
+    background-color: #F2E9E9;
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+
+
+h1, h2 {
+    color: #730202;
+}
+
+button {
+    background-color: #F2AB27;
+    color: #730202;
+    text-align: center;
+    padding: 10px ;
+    border-radius: 8px;
+}
+
+input {
+    background-color: #F2E9E9;
+}

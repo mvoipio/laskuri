@@ -1,0 +1,65 @@
+/* Fonts, Roboto from Google Fonts */
+body {
+    font-family: 'Roboto', 'Verdana', 'Arial', sans-serif;
+    padding-left: 5%;
+    }
+    
+    h2 {
+        padding-top: 20px;
+    }
+    
+    label {
+        font-size: 80%;
+    }
+    
+    .footer {
+        font-size: 70%;
+        font-style: italic;
+    }
+    
+    a:link.undecorated{
+        /*text-decoration: none; */
+        color: black;
+    }
+    
+    input {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    
+    input.number {
+        width: 50px;
+    }
+    
+    .bold {
+        font-weight: bold;
+    }
+    
+    .extrapad {
+        padding-top: 20px;
+    }
+    
+    th {
+        text-align: left;
+        font-weight: normal;
+        font-style: italic;
+    }
+    
+    #lomake th {
+        font-size: 80%;
+    }
+    
+    #taulukko table {
+        border: 1px solid;
+        border-color: #730202;
+    }
+    
+    #taulukko th {
+        border: 1px solid;
+        border-color: #730202;
+    }
+    
+    #taulukko td {
+        border: 1px solid;
+        border-color: #730202;
+    }
