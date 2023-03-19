@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Loimilaskuri pirtanauhalle</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="css/colors.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/print.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<script src="js/lpituus.js"></script>
+<script src="js/swatchy.js"></script>
+<script src="https://kit.fontawesome.com/a251d3b27f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<img src="" alt="">
+
+<div id="content">
+
+<h1>Loimilaskuri pirtanauhalle</h1>
+
+<p>Voit laskea ensin loimen pituuden valmiin nauhan pituuden perusteella ja sitten tarvittavat lankamäärät.
+    Voit myös siirtyä suoraan langan tarpeen laskuriin ja asettaa siihen itse loimen pituuden.
+</p>
+
+<div id="pituuslaskurialue">
+
+<h2>Loimen pituuden laskeminen</h2>
+
+<!-- Peruslaskutoimitus: 10 % kutistumisvaraa + 30 cm tutkaimia -->
+
+<p>Laskuri laskee, kuinka pitkä loimi sinun pitää luoda, jos valmista nauhaa halutaan esimerkiksi 150 cm.</p>
+
+<form id="pituuslaskuri">
+    <label for="tpituus">Kirjoita tähän valmiin nauhan pituus sentteinä:</label></br>
+    <input class="number" type="text" id="tpituus" name="tpituus"> cm</br>
+    <label for="lpituus">Mahdollinen lisäpituus (esim. tupsuihin) sentteinä:</label><br>
+    <input class="number" type="text" id="lpituus" name="lpituus"> cm
+</form>
+
+<button id="laskepituus" type="button" onclick="laskePituus()">Laske</button>
+
+<p id="laskutulos" style="display:none;">Loimen täytyy olla <span id="vpituus">0</span> cm pitkä.</p>
+
+<button id="kopioipituus" type="button" style="display:none;" onclick="kopioiTeksti()">Kopioi mitta leikepöydälle</button>
+
+</diV>
+
+<div id="lankakaskurialue">
+
+<h2>Langan tarpeen laskuri</h2>
+
+<p id="hideaway" style="display:none;">Lasketaan langan menekki <span id="apituus">0</span> sentin loimelle.</p>
+
+<p>Jos haluat laskea lankamäärät jollekin muulle loimelle kuin yllä lasketulle,
+    voit kirjoittaa ruutuun uuden mitan sentteinä ja painaa sitten Aseta pituus-nappia.</p>
+
+<form id="uusipituus">
+    <input class="number" type="text" id="upituus" name="upituus"> cm</br>
+</form>
+
+<button id="vaihdapituus" type="button" onclick="vaihdaPituus()">Aseta pituus</button>
+
+<p id="showaway" style="display:none;">Lasketaan langan menekki <span id="fpituus"></span> sentin loimelle.</p>
+
+<p class="extrapad">Kirjoita langan väri ja merkitse lankojen kokonaismäärä kutomisohjeen mukaan.
+    Jos käytät kuviolankoja kaksinkertaisina, laita merkki ruutuun "Tuplaus", niin saat oikean langan pituuden.<br>
+    Jos vahingossa teet ylimääräisen rivin, paina roskakorin kuvaa rivin lopussa ja rivi häviää.
+</p>
+
+
+<table id="lomake">
+<form id="lankalaskuri">
+    <tr>
+        <th>Väri</th>
+        <th>Lankamäärä</th>
+        <th>Tuplaus
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td><input type="text" name="vari"></td>
+        <td><input class="number" type="text" name="maara"></td>
+        <td><input type="checkbox" name="tupla"></td>
+        <td></td>
+    </tr>
+
+</form>
+</table>
+
+<button id="lisaarivi" type="button" onclick="addRow()">Lisää rivi</button>
+
+<p><button id="laskelangat" class="bold" type="button" onclick="findData()">Laske</button></p>
+
+<!-- <table id="taulukko">
+    <tr><th>Langan väri</th><th>Tarvittava pituus metreinä</th></tr>
+</table> -->
+
+<div id="taulukko" onclick="findData()">
+
+</div>
+
+<p id="langatyht" style="display:none;">Lankoja (yksin- tai kaksinkertaisena) on yhteensä <span id="lankamaara">0</span>.</p>
+
+<!-- Värien maksimimäärä? Varmana olisi helpompaa vähän rajoittaa...-->
+
+<p class="extrapad"><button id="tulosta" type="button" onclick="tulosta()" style="display:none;">Tulosta laskelmat</button> <button id="tyhjenna" type="button" onclick="tyhjenna()" style="display:none;">Tyhjennä sivun tiedot</button></p>
+
+
+</div>
+
+<hr>
+
+<p class="footer">&copy; Mari Voipio 2023, mari.voipio@lucet.fi</p>
+
+<p class="footer">Taustakuva: <a class="undecorated" href="https://www.finna.fi/Record/skm.158567390330000" target="_blank">Suomen käsityön museo</a>
+</p>
+
+</div>
+
+</body>
+</html> 
