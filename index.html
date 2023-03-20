@@ -43,7 +43,7 @@
 
 <button id="laskepituus" type="button" onclick="laskePituus()">Laske</button>
 
-<p id="laskutulos" style="display:none;">Loimen täytyy olla <span id="vpituus">0</span> cm pitkä.</p>
+<p id="laskutulos" style="display:none;">Loimen täytyy olla <span id="vpituus"></span> cm pitkä.</p>
 
 <button id="kopioipituus" type="button" style="display:none;" onclick="kopioiTeksti()">Kopioi mitta leikepöydälle</button>
 
@@ -103,11 +103,12 @@
 
 </div>
 
-<p id="langatyht" style="display:none;">Lankoja (yksin- tai kaksinkertaisena) on yhteensä <span id="lankamaara">0</span>.</p>
+<p id="langatyht" style="display:none;">Lankoja (yksin- tai kaksinkertaisena) on yhteensä <span id="lankamaara"></span>.</p>
 
 <!-- Värien maksimimäärä? Varmana olisi helpompaa vähän rajoittaa...-->
 
-<p class="extrapad"><button id="tulosta" type="button" onclick="tulosta()" style="display:none;">Tulosta laskelmat</button> <button id="tyhjenna" type="button" onclick="tyhjenna()" style="display:none;">Tyhjennä sivun tiedot</button></p>
+<p class="extrapad"><button id="tulosta" type="button" onclick="tulosta()" style="display:none;">Tulosta laskelmat</button>
+    <button id="tyhjenna" type="button" onclick="tyhjenna(), refresh()" style="display:none;">Tyhjennä sivun tiedot</button></p>
 
 
 </div>

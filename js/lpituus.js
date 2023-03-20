@@ -163,6 +163,12 @@ function tyhjenna(){
         document.getElementById("lomake").deleteRow(k);
     }
     document.getElementById('laskutulos').style.display='none';
+    document.getElementById('showaway').style.display='none';
     document.getElementById('kopioipituus').style.display='none';
     document.getElementById('taulukko').style.display='none';
+    document.getElementById('langatyht').style.display='none';
+}
+
+function refresh() {
+    location.reload();
 }
