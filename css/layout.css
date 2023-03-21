@@ -1,0 +1,93 @@
+/* Fonts, Roboto from Google Fonts */
+body {
+    font-family: 'Roboto', 'Verdana', 'Arial', sans-serif;
+    padding-left: 5%;
+    }
+    
+    h2 {
+        padding-top: 20px;
+    }
+    
+    label {
+        font-size: 80%;
+    }
+    
+    .footer {
+        font-size: 70%;
+        font-style: italic;
+    }
+    
+    a.undecorated{
+        /*text-decoration: none; */
+        color: black;
+    }
+    
+    input {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    
+    input.number {
+        width: 50px;
+    }
+    
+    .bold {
+        font-weight: bold;
+    }
+    
+    .extrapad {
+        padding-top: 20px;
+    }
+    
+    th {
+        text-align: left;
+        font-weight: normal;
+        font-style: italic;
+    }
+    
+    #lomake th {
+        font-size: 80%;
+    }
+
+
+    /* Smaller padding for trashcan button to diminish row height */
+    button.trash {
+        padding: 3px;
+    }
+
+    /* a bit unintuitive, but this makes the trashcan icon itself smaller */
+    i {
+        font-size: 80%;
+    }
+    
+    #taulukko table {
+        border: 1px solid;
+        border-color: #730202;
+    }
+    
+    #taulukko th {
+        border: 1px solid;
+        border-color: #730202;
+        padding: 10px;
+    }
+    
+    #taulukko td {
+        border: 1px solid;
+        border-color: #730202;
+        padding: 10px;
+    }
+
+    button.left{
+        float:left;
+        margin-bottom: 20px;
+    }
+    
+    button.right{
+        float:left;
+        margin-left: 5px; /* to put some space between this and the button on the left of it */
+        margin-bottom: 20px;
+    }
+
+    hr {
+        clear: both; /* to clear the float left by the bottom buttons */
+    }

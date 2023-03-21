@@ -23,7 +23,7 @@
 <h1>Loimilaskuri pirtanauhalle</h1>
 
 <p>Voit laskea ensin loimen pituuden valmiin nauhan pituuden perusteella ja sitten tarvittavat lankamäärät.
-    Voit myös siirtyä suoraan langan tarpeen laskuriin ja asettaa siihen itse loimen pituuden.
+    Voit myös siirtyä suoraan lankamäärä laskuriin ja asettaa siihen itse loimen pituuden.
 </p>
 
 <div id="pituuslaskurialue">
@@ -36,9 +36,9 @@
 
 <form id="pituuslaskuri">
     <label for="tpituus">Kirjoita tähän valmiin nauhan pituus sentteinä:</label></br>
-    <input class="number" type="text" id="tpituus" name="tpituus"> cm</br>
+    <input class="number" type="number" id="tpituus" name="tpituus"> cm</br>
     <label for="lpituus">Mahdollinen lisäpituus (esim. tupsuihin) sentteinä:</label><br>
-    <input class="number" type="text" id="lpituus" name="lpituus"> cm
+    <input class="number" type="number" id="lpituus" name="lpituus"> cm
 </form>
 
 <button id="laskepituus" type="button" onclick="laskePituus()">Laske</button>
@@ -59,7 +59,7 @@
     voit kirjoittaa ruutuun uuden mitan sentteinä ja painaa sitten Aseta pituus-nappia.</p>
 
 <form id="uusipituus">
-    <input class="number" type="text" id="upituus" name="upituus"> cm</br>
+    <input class="number" type="number" id="upituus" name="upituus"> cm</br>
 </form>
 
 <button id="vaihdapituus" type="button" onclick="vaihdaPituus()">Aseta pituus</button>
@@ -82,8 +82,8 @@
         <th></th>
     </tr>
     <tr>
-        <td><input type="text" name="vari"></td>
-        <td><input class="number" type="text" name="maara"></td>
+        <td><input id="vari1" type="text" name="vari" pattern="[a-zA-Z0-9]+"></td>
+        <td><input id="lmaara1" class="number" type="number" name="maara" min="1" max="100"></td>
         <td><input type="checkbox" name="tupla"></td>
         <td></td>
     </tr>
@@ -95,20 +95,19 @@
 
 <p><button id="laskelangat" class="bold" type="button" onclick="findData()">Laske</button></p>
 
-<!-- <table id="taulukko">
-    <tr><th>Langan väri</th><th>Tarvittava pituus metreinä</th></tr>
-</table> -->
+<div id="tulostettava">
 
 <div id="taulukko" onclick="findData()">
 
 </div>
 
-<p id="langatyht" style="display:none;">Lankoja (yksin- tai kaksinkertaisena) on yhteensä <span id="lankamaara"></span>.</p>
+<p id="langatyht" style="display:none;">Laskelmaan käytetty loimen pituus: <span id="pituusf"></span> cm.</br>
+Lankoja (yksin- tai kaksinkertaisena) yhteensä: <span id="lankamaara"></span>.</p>
 
-<!-- Värien maksimimäärä? Varmana olisi helpompaa vähän rajoittaa...-->
+</div>
 
-<p class="extrapad"><button id="tulosta" type="button" onclick="tulosta()" style="display:none;">Tulosta laskelmat</button>
-    <button id="tyhjenna" type="button" onclick="tyhjenna(), refresh()" style="display:none;">Tyhjennä sivun tiedot</button></p>
+<p class="extrapad"><button class="left" id="tulosta" type="button" onclick="tulosta()" style="display:none;">Tulosta laskelmat</button>
+    <button class="right" id="tyhjenna" type="button" onclick="tyhjenna(), refresh()" style="display:none;">Tyhjennä sivun tiedot</button></p>
 
 
 </div>

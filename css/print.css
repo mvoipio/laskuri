@@ -51,15 +51,18 @@ body {
     
     #taulukko table {
         border: 1px solid;
-        border-color: #730202;
+        border-color: black;
+        border-collapse: collapse;
     }
     
     #taulukko th {
         border: 1px solid;
-        border-color: #730202;
+        border-color: black;
+        padding: 10px;
     }
     
     #taulukko td {
         border: 1px solid;
-        border-color: #730202;
+        border-color: black;
+        padding: 10px;
     }

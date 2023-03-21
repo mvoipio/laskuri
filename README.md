@@ -12,6 +12,8 @@ Web development (HTML+CSS)
     Icons: https://fontawesome.com/docs/web/add-icons/how-to
     Forms in tables: https://www.geeksforgeeks.org/how-to-use-tables-to-structure-forms/
     How to add icons in the button in HTML? https://www.geeksforgeeks.org/how-to-add-icons-in-the-button-in-html/
+    Two buttons side by side: https://stackoverflow.com/questions/52544089/how-to-create-two-html-buttons-side-by-side
+    Input type number: https://www.techiedelight.com/restrict-html-input-text-box-to-allow-only-numeric-values/
 
 
 Javascript
@@ -29,8 +31,14 @@ Javascript
     Making local variable into a global one (for setting a new warp length): https://stackoverflow.com/questions/27887884/how-to-make-a-local-variable-into-a-global-in-javascript
     Merging two arrays in turn: https://dev.to/miku86/javascript-katas-merge-two-arrays-2gb1
     Converting the single array into a table: https://jsfiddle.net/k3ptoc4k/5/
-    Printing, resetting from W3 Schools
     Get number of table rows from a HTML table: https://stackoverflow.com/questions/11742946/get-the-number-of-rows-in-a-html-table
+    Printing a single div _with_ CSS: https://stackoverflow.com/questions/21379605/printing-div-content-with-css-applied
+    Data validation basics: https://www.javatpoint.com/javascript-form-validation
+    Validating input as numbers in a range: https://www.w3schools.com/js/tryit.asp?filename=tryjs_validation_number
+    Replacing empty entries into zeros in an array:https://stackoverflow.com/questions/51259553/replacing-empty-with-zero-values-in-array
+    
+
+
 
 
 
