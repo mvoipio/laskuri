@@ -14,6 +14,7 @@ Web development (HTML+CSS)
     How to add icons in the button in HTML? https://www.geeksforgeeks.org/how-to-add-icons-in-the-button-in-html/
     Two buttons side by side: https://stackoverflow.com/questions/52544089/how-to-create-two-html-buttons-side-by-side
     Input type number: https://www.techiedelight.com/restrict-html-input-text-box-to-allow-only-numeric-values/
+    Why my HTML5 form instant validation doesn't work: https://fellowtuts.com/html-css/html5-required-attribute-validation-not-working/
 
 
 Javascript
@@ -36,7 +37,7 @@ Javascript
     Data validation basics: https://www.javatpoint.com/javascript-form-validation
     Validating input as numbers in a range: https://www.w3schools.com/js/tryit.asp?filename=tryjs_validation_number
     Replacing empty entries into zeros in an array:https://stackoverflow.com/questions/51259553/replacing-empty-with-zero-values-in-array
-    
+
 
 
 

@@ -141,10 +141,13 @@ function findData() {
     console.log(lmaara_array);
     console.log(tupla_array);
     }
-    for (var i = 0; i < vari_array.length; i++) {   // turning empty rows into number to stop NaN at total
-        if (vari_array[i] == undefined) {
-            vari_array[i] = 0;
-        }   
+    for (var i = 0; i < lmaara_array.length; i++) {   // turning empty rows into number to stop NaN at total
+        if (lmaara_array[i] == undefined) {
+            lmaara_array[i] = 0;
+        } else if (lmaara_array[i] < 0){
+            alert("Joku lankamääristä on negatiivinen");
+            return false;
+        }
     }
     for (let j = 0; j < lmaara_array.length; j++) {  // arrays are always the same length
         pituus_array[j] = (lmaara_array[j]) * (tupla_array[j]) * (pituus / 100); // total length of one color needed

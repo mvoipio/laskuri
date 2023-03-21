@@ -38,6 +38,12 @@ body {
     .extrapad {
         padding-top: 20px;
     }
+
+    .mbottom {
+        margin-bottom: 30px;
+    }
+
+
     
     th {
         text-align: left;
@@ -77,12 +83,12 @@ body {
         padding: 10px;
     }
 
-    button.left{
+    .left{
         float:left;
         margin-bottom: 20px;
     }
     
-    button.right{
+    .right{
         float:left;
         margin-left: 5px; /* to put some space between this and the button on the left of it */
         margin-bottom: 20px;
