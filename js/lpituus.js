@@ -1,9 +1,9 @@
-// Function called when the form is submitted.
-// Function performs the calculation and returns an integer
-// TODO: input needs to be validated (integers 10-1500 only valid input)
 
+// loimen pituus/warp length is a global variable carried throughout
 var pituus=0;
 
+
+// calculates the length of warp when the length of finished band is known
 function laskePituus () {
 
 //total length of warp
