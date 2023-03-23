@@ -2,9 +2,10 @@
 body {
     font-family: 'Roboto', 'Verdana', 'Arial', sans-serif;
     padding-left: 5%;
+    padding-right: 5%;
     }
     
-    h2 {
+    h2, h3 {
         padding-top: 20px;
     }
     
@@ -96,4 +97,46 @@ body {
 
     hr {
         clear: both; /* to clear the float left by the bottom buttons */
+    }
+
+
+    img.centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+      }
+
+
+    
+    figcaption {
+        width: 300px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    
+
+    iframe.centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      a.red{
+        /*text-decoration: none; */
+        color: #730202;
+    }
+
+    a.noul{
+        text-decoration: none;;
+    }
+
+    .monospace{
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    #todo li {
+        padding: 5px;
     }

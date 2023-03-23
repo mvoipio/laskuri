@@ -23,7 +23,7 @@ function laskePituus () {
     if (lpituus.length == 0) {
         lpituus= 0;
     } else if (lpituus < 0 || lpituus > 200){
-        alert("Syötäthän lisäpituuden välillä 0-150");
+        alert("Syötäthän lisäpituuden välillä 0-200");
         return false;
     }
 
@@ -60,8 +60,8 @@ function vaihdaPituus () {
     if(upituus==null || upituus==""){
         alert("Loimen pituus tarvitaan");
         return false;
-    } else if (upituus < 10 || upituus > 1500){
-        alert("Syötäthän nauhan toivotun pituuden välillä 10-1500");
+    } else if (upituus < 10 || upituus > 2000){
+        alert("Syötäthän loimen toivotun pituuden välillä 10-2000");
         return false;  
     } else {
     document.getElementById("upituus").innerHTML = upituus;
@@ -76,8 +76,8 @@ function vaihdaPituus () {
 // There should probably be a limit to how many rows one can add
 // For validation reasons you can't enter a new row unless the very first one is filled
 function addRow() {
-    if (pituus < 10 || pituus > 1500){
-        alert("Anna loimen pituus");
+    if (pituus < 10 || pituus > 2000){
+        alert("Loimen pituutta ei ole annettu tai se ei ole välillä 10-2000");
         return false;
     }
     var tableRow = document.getElementById("lomake");
@@ -113,6 +113,10 @@ function deleteRow(r) {
 
 // Extracting input from a table, validating it and inputting it into a table
 function findData() {
+        if (pituus < 10 || pituus > 1500){
+            alert("Loimen pituutta ei ole asetettu tai se ei ole välillä 10-1500");
+            return false;
+        }
     var vari = document.getElementById("vari1").value;
     lankamaara = document.getElementById("lmaara1").value;
     // Checking that there is input to handle; you can't make other rows it the first row isn't filled, so this check is enough
@@ -160,7 +164,7 @@ function findData() {
     document.getElementById("pituusf").innerHTML = pituus;
     document.getElementById("lankamaara").innerHTML = langat;
 
-    // I may want to merge vari_array and pituus_array
+    // I want to merge vari_array and pituus_array
     // Arrays are always of equal length, doesn't need checking
     let t_array = []
     for (let k = 0; k < vari_array.length; k++){
@@ -197,10 +201,6 @@ function findData() {
 }
 
 
-// säädä CSS:llä niin, että tulostuu vain loimen pituus, taulukko ja lankojen määrä
-/* function tulosta(){
-    window.print()
-} */
 
 // printing function that should print one div with css
 // code almost unchanged from https://stackoverflow.com/questions/21379605/printing-div-content-with-css-applied

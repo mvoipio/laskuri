@@ -1,12 +1,16 @@
-body {
+body.laskuri {
     background-image: url("taustakuva.png");
     background-color: #F2E9E9;
     background-size: cover;
     background-repeat: no-repeat;
    }
 
+   body.muusivu {
+    background-color: #F2E9E9;
+   }
 
-h1, h2 {
+
+h1, h2, h3 {
     color: #730202;
 }
 

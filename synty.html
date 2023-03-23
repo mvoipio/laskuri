@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tarina pirtanauhalaskurin synnystä</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="css/colors.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/print.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="muusivu">
+
+<h1>Tarina pirtanauhalaskurin synnystä</h1>
+
+<p>Pirtanauhalaskurin siemen kylvettiin viime syksynä, kun vedin Facebookissa pirtanauhan yhteiskudontaa. Osallistujat eivät olleet
+    koskaan tehneet pirtanauhaa, joten kaikki piti opettaa - myös ne kaavat, joilla lasketaan loimen ja langan tarve. Löysin kyllä verkosta
+    useita pirtanauhan suunnitteluun tarkoitettuja ohjelmia, joista yhdestä on tullut suosikkini, mutta kaikki lopettavat laskemisen
+    viimeistään siinä vaiheessa, kun on raportoitu, montako punaista ja montako valkoista lankaa tarvitaan. Koodaamani laskuri
+    yrittää vastata tähän tarpeeseen.
+</p>
+
+<h2>Alussa oli suunnitelma - tai kaksi</h2>
+
+<p>Kun yhtäkkiä ymmärsin, että voisin koodata laskurin harjoitustehtävänä, tein siitä
+    <a class="red" href="https://app.moqups.com/10mpBBxg7UHpGiMu8z07xEqDceaHoq5v/view/page/aa209b512">pikaisen hahmotelman Moqupsilla</a>.
+Sitten kävi niin, että toisella kurssilla piti tehdä käyttöliittymäsuunnittelua ja jotenkin sekin tuli tehtyä pirtanauhasta. Näin minulla
+oli käytössä valmis väripaletti. Se on tehty <a class="red" target="_blank" href="https://color.adobe.com/create/image">color.adobe.com</a>-palvelun avulla suoraan
+laskurin taustana olevasta <a class="red" target="_blank" href="https://www.finna.fi/Record/skm.158567390330000">Suomen käsityön museon nauhakuvasta</a>.</p>
+
+<img class="centered" src="img/palette.png">
+
+<h2>Sitten tuli peruskoodi</h2>
+
+<p>Koska epäilin, että projektin kanssa tulee kiire, valitsin ketterän kehityksen mallin: ensin koodi, jossa on perustoiminnallisuus,
+    sitten ulkonäön viritys css-koodilla, lopuksi koodin hienosäätö. Perusmuotoista dokumentaatiota tein matkan varrella mahdollisimman paljon,
+    koska sen kerääminen kasaan jälkikäteen on yleensä paljon tuskallisempaa.
+</p>
+
+<p>Onneksi olin vahingossa suunnitellut systeemin, jonka alkupää oli helpompi koodata, niin tuli ensin harjoiteltua perusasioita.
+    Ensimmäinen laskuri vain kysyy kaksi numeroa, suorittaa yksinkertaisen laskutoimituksen ja pulauttaa tuloksen ruudulle. Tuloksen kopiointi
+    leikepöydällekin oli teoriassa helppoa, käytännössä ei. Lopulta ymmärsin muuntaa <span class="monospace">pituus</span>-muuttujan arvon stringiksi ja homma alkoi toimia.
+</p>
+
+<p>Toinen pätkä oli muuttujan <span class="monospace">pituus</span> vaihtaminen komennosta. Peruskoodi syntyi aika vähällä, mutta uuden arvon tekeminen
+globaaliksi ei ollut onnistua. Jostain sitten löytyi kikka <span class="monospace">upituus = pituus;</span>, jolla annettu uusi pituus pakotetaan globaaliksi,
+jotta se toimii seuraavassa vaiheessa oikein.</p>
+
+<p>Kolmas osuus oli sitten haasteellisempi. Olisin voinut päättää, että pirtanauhassa on korkeintaan kuusi väriä ja tehdä kiinteän taulukon,
+    mutta piti sitten nyhrätä kasaan dynaaminen taulukko. Rivin lisääminen ja rivin poistaminen oli vielä suhteellisen helppoa,
+    mutta sitten olisi pitänyt saada joka solulle oma id ja entä jos välistä ottaakin rivin pois? Ja miten ne id:t ylipäänsä numeroidaan
+    niin, että uuden rivin myötä tulee esimerkiksi sama id isommalla numerolla? Ja miten niitä sitten käytetään?
+</p>
+
+<p>Tulostaulukko-ongelma ratkesi lopulta matriisilla. Ensin piti keksiä tai oikeastaan löytää ja soveltaa sellainen silmukka, jolla
+    luetaan tiedot sarake kerrallaan jokaisen omaksi matriisikseen (<span class="monospace">vari_array[ ]</span>,
+    <span class="monospace">lmaara_array[ ]</span>, <span class="monospace">tupla_array[ ]</span>). Kaksi ensimmäistä eli
+    lankaväri ja lankojen määrä luetaan sisään sellaisenaan, kolmas on tuplausvalinta ja jos sitä ei ole valittu, arvo on 1 ja jos se on
+    valittu (checked), arvo on 2. Näistä sitten lasketaan seuraavalla silmukalla uusi matriisi
+    <span class="monospace">pituus_array[ ]</span>, jossa siis kerrotaan loimen
+    pituus lankamäärällä ja tarvittaessa vielä kahdella (jos tuplaus on päällä). Lopuksi koko roska jaetaan sadalla, jotta saadaan metrejä
+</p>
+
+<p>Tässä vaiheessa minulla oli siis kaksi matriisia, joissa toisessa on langan väri ja toisessa tarvittava lankamäärä metreinä. Elämää
+    helpotti se, että nämä matriisit ovat aina saman pituiset. Niissä voi olla tyhjiä arvoja, mutta ei tarvitse etsiskellä pidempää,
+    pituusmitan silmukkaa varten voi ottaa kummasta vain. Sitten selvitin, miten matriisit yhdistetään vuorotellen matriisiksi
+    <span class="monospace">t_array[ ]</span>.
+    Siitä saakin sitten parilla sisäkkäisellä silmukalla rakennettua valmiin html-taulukon.
+</p>
+
+<p>Viimeisessä vaiheessa piti askarrella nappeja taulukon alle. Tein tulostuksen ihan peruskomennolla ja ajattelin säätää sitä css:n avulla.
+    Tyhjennys oli vähän haastavampi, koska taulukon nollaaminen ei ollutkaan ihan pikkujuttu. Lopulta tajusin, että taulukko pitää
+    poistaa alhaalta käsin, koska taulukon rivimäärä tietenkin pienenee aina, kun siitä ottaa rivin pois.
+</p>
+
+<p>Helpoin homma koko koodaamisessa oli määräillä sitä, mitä rivejä milloinkin näytetään ja mitä poistetaan. Näin esimerkiksi tulostusnappi
+    näytetään vasta, kun on jotain tulostettavaa.
+</p>
+
+<p>Tuuppasin koodatun sivun netlify:hyn, jotta on ainakin jotain jätettävää. Muuten meni hienosti, mutta osa toiminnoista lakkasi 
+    käyttäytymästä. Melkoisen ähertämisen jälkeen ymmärsin, että tämä johtui välimuistista ja että se piti ohittaa <span class="monospace">location.reload</span>-komennolla
+    silloin, kun tiedot tyhjennetään. Komennon testaaminen paikallisesti oli erittäin hankalaa, mutta kun tuupppasin uuden koodin
+    verkkoon, kaikki alkoi toimia eikä ole ryttyillyt sen jälkeen.
+</p>
+
+
+<h2>Sitten viilattiin ulkonäköä</h2>
+
+<p>Kun peruskoodi vihdoin toimi, oli aika kerrata CSS:n käyttöä. Tämä oli paljon nopeampi operaatio, perusasiat on joskus 
+    kuitenkin osattu, ja värimaailma oli selvillä. Fontinkin vetäisin suoraan toista projektia varten kaivetusta listasta <a class="red"
+    target="_blank" href="https://wplook.com/top-sans-serif-fonts/">Top 10 Sans-Serif Fonts Used by Web Designers in 2022</a> - Roboto
+    on Androidin fontti ja suosituin sans-serif, päätin olla sooloilematta ja otin sen. Sivulta löytyy kätevästi linkki Google Fontsiin 
+    ja siellä on hyvät ohjeet siitä, miten fontin saa sivustolleen (varalla on sitten Verdana, Arial, sans-serif). 
+</p>
+
+<p>Ylipäänsä ulkonäköpuolella on vähän mitään erityisen hienoa tai omituista. Olen jo vanhastaan tottunut tekemään kaiken mahdollisen 
+    tyylitiedostolla, joten itse html on ihan perusmallia. Jos ja kun laskuri tulee jollekin kotisivulleni verkkoon, on paljon helpompaa, 
+    kun sen saa yhtenäisen näköiseksi vain css-tiedostoa vaihtamalla ja vähän hienosäätämällä.
+</p>
+
+
+<h2>Perustoimintojen perään vähän validaatiota</h2>
+
+<p>Huomasin itse koodausvaiheessa, että loppupäätä säätäessä on hyvin helppo unohtaa asettaa loimen pituus jollain tavalla ja sitten
+    tuli kummallisia taulukoita ja laskutuloksia. Joten ensimmäisenä viritin kaikki skriptit tarkistamaan, että loimen pituudella on 
+    arvo välillä 10-2000. Alun loimilaskuri antaa virheilmoituksen, jos loimen pituutta ei ole, lisäloimen pituus saa olla tyhjä tai välillä 
+    0-200. Toisen osuuden lankalaskuriin ei saa lisää rivejä, jos loimen pituutta ei ole annettu eikä se myöskään laske mitään, jos 
+    se ei tiedä loimen pituutta.
+</p>
+
+<p>Taulukon validointi oli vaikeaa, kun soluilla ei ole id:tä. Pakollinen ja kiinteä ensimmäinen rivi on validoitu siten, että jos 
+    sillä ei ole langan nimeä ollenkaan ja/tai lankamäärää, ei voi tehdä uusia rivejä eikä langan menekkiä lasketa vaan aina saa 
+    virheilmoituksen. Osa validointiongelmasta ratkesi myös sillä, että määritin numeroruudut numeroiksi. Lisäksi menekkilaskuri 
+    (funktio <span class="monospace">findData( )</span>) antaa virheilmoituksen, jos lankamäärä ei ole välillä 1-100. Yli sataa yhtä 
+    väriä ei pitäisi kenenkään tarvita, leveimmät suomalaiset pirtanauhat taitavat olla luokkaa 103-105 lankaa ja silloin värejä 
+    on useampia.<br> 
+    Värin nimeksi voi nyt laittaa mitä vain, mutta se on oikeastaan vain käyttäjän ongelma. Yritin rajoittaa sen HTML5-koodilla 
+    alfanumeeriseksi, mutta se ei onnistukaan tällaisessa lomakkeessa ihan noin vain eikä homman koodaaminen JavaScriptillä ole ihan 
+    helppo nakki, niin jätin väliin.<br>
+    Validoinnin pitäisi nyt olla siis sillä asteella, että aina on jotain laskettavaa ennen kuin laskurit oikeasti menevät päälle ja 
+    että numeroiksi ei voi syöttää mitään ihan mahdotonta niin kuin vaikka negatiivista lankamäärää.
+</p>
+
+<h2>Viimeinen viilaus</h2>
+
+<p>Tulostuksen huonous alkoi ärsyttää niin paljon, että päätin tehdä sen uusiksi. Oikeastihan käyttäjä tarvitsee vain sen ihan viimeisen 
+    taulukon ja varmistusluvut siitä alta, ei mitään muuta. Yhden <span class="monospace">div</span>-elementin tulostaminen osoittautuikin 
+    sitten ihan äärelliseksi tehtäväksi, vaikeinta oli saada systeemi tekemään se tyylitiedoston kera, jotta esimerkiksi fonttivärit 
+    saatiin vaihdettua mustavalkotulostukseen sopiviksi.
+</p>
+
+<p>Tämän jälkeen näpertelin vielä siellä täällä, viritin kaksi alinta nappia (Tulosta ja Tyhjennä) rinnakkain ja väkästelin tyhjän 
+    tilan kanssa ja kaikenlaista muuta pienempää, mutta siinä se nyt sitten oli. Vielä META-sivut kasaan ja video purkkiin ja tehtävä 
+    on tältä erää tehty.
+</p>
+
+
+<h2>Lähteet</h2>
+
+<p>Mitä vähemmän lahjakkaat ohjelmoijat ennen tekivät ennen kuin oli Googlea? Kai se oli vain sitten selvittävä O'Reillyn sarvikuonokirjalla
+    ja räpellettävä parhaansa mukaan. En varsinaisesti kopioinut koodia mistään uusinta tulostuspätkää 
+    lukuunottamatta, mutta malleja, vinkkejä ja vastauksia ongelmiin etsin kyllä senkin edestä. Ainakin tässä vaiheessa "uraani" Olen 
+    ennemminkin sitkeä kuin lahjakas, ongelmanratkaisukyvyt kyllä kehittyivät projektin varrella aika lailla.
+</p>
+
+<h3>HTML ja CSS</h3>
+
+<ul>
+<li>Lots of HTML, CSS coding checked at: <a class="red" href="https://www.w3schools.com/">https://www.w3schools.com/</a></li>
+<li>Trashcan icon: Font Awesome icon usage tip: <a class="red" href="https://www.w3schools.com/css/css_icons.asp">https://www.w3schools.com/css/css_icons.asp</a>
+    and <a class="red" href="https://fontawesome.com/docs/web/add-icons/how-to">https://fontawesome.com/docs/web/add-icons/how-to</a></li>
+<li>Top 10 Sans-Serif Fonts Used by Web Designers in 2022: <a class="red" href="https://wplook.com/top-sans-serif-fonts/">https://wplook.com/top-sans-serif-fonts/</a></li>
+<li>Roboto font download page and usage instructions: <a class="red" href="https://fonts.google.com/specimen/Roboto">https://fonts.google.com/specimen/Roboto</a></li>
+<li>Forms in tables: <a class="red" href="https://www.geeksforgeeks.org/how-to-use-tables-to-structure-forms/">https://www.geeksforgeeks.org/how-to-use-tables-to-structure-forms/</a></li>
+<li>How to add icons in the button in HTML? <a class="red" href="https://www.geeksforgeeks.org/how-to-add-icons-in-the-button-in-html/">https://www.geeksforgeeks.org/how-to-add-icons-in-the-button-in-html/</a></li>
+<li>Two buttons side by side: <a class="red" href="https://stackoverflow.com/questions/52544089/how-to-create-two-html-buttons-side-by-side">https://stackoverflow.com/questions/52544089/how-to-create-two-html-buttons-side-by-side</a></li>
+<li>Input type number: <a class="red" href="https://www.techiedelight.com/restrict-html-input-text-box-to-allow-only-numeric-values/">https://www.techiedelight.com/restrict-html-input-text-box-to-allow-only-numeric-values/</a></li>
+<li>Why my HTML5 form instant validation doesn't work: <a class="red" href="https://fellowtuts.com/html-css/html5-required-attribute-validation-not-working/">https://fellowtuts.com/html-css/html5-required-attribute-validation-not-working/</a></li>
+</ul>
+
+<h3>JavaScript</h3>
+
+<ul>
+    <li>parseInt tip: https://www.tutorialspoint.com/javascript-plus-sign-concatenates-instead-of-giving-sum</li>
+    <li>Check empty string: https://www.freecodecamp.org/news/javascript-check-empty-string-checking-null-or-empty-in-js/</li>
+    <li>copy to clipboard: https://www.w3schools.com/howto/howto_js_copy_clipboard.asp</li>
+    <li>Making a paragraph appear or disappear on click: https://www.sean.co.uk/a/webdesign/javascript_hide_reveal_appear_disappear.shtm</li>
+    <li>Inserting a row at the bottom of the table: https://linuxhint.com/add-row-to-html-table-using-javascript/</li>
+    <li> the table row you click on: https://www.w3schools.com/jsref/met_table_deleterow.asp</li>
+    <li>Extracting data from a HTML table: https://code-boxx.com/javascript-get-html-table-data/ (didn't work because I didn't have values)</li>
+    <li>Getting input value from HTML table without id: https://stackoverflow.com/questions/56607473/how-to-get-input-value-without-id-from-table</li>
+    <li>Multiplying arrays to get a new array: https://www.tutorialspoint.com/how-to-multiply-two-arrays-in-javascript</li>
+    <li>Making local variable into a global one (for setting a new warp length): https://stackoverflow.com/questions/27887884/how-to-make-a-local-variable-into-a-global-in-javascript</li>
+    <li>Merging two arrays in turn: https://dev.to/miku86/javascript-katas-merge-two-arrays-2gb1</li>
+    <li>Converting the single array into a table: https://jsfiddle.net/k3ptoc4k/5/</li>
+    <li>Get number of table rows from a HTML table: https://stackoverflow.com/questions/11742946/get-the-number-of-rows-in-a-html-table</li>
+    <li>Printing a single div _with_ CSS: https://stackoverflow.com/questions/21379605/printing-div-content-with-css-applied</li>
+    <li>Data validation basics: https://www.javatpoint.com/javascript-form-validation</li>
+    <li>Validating input as numbers in a range: https://www.w3schools.com/js/tryit.asp?filename=tryjs_validation_number</li>
+    <li>Replacing empty entries into zeros in an array:https://stackoverflow.com/questions/51259553/replacing-empty-with-zero-values-in-array</li>
+</ul>
+
+<h3>Visual Studio Code</h3>
+
+<ul><li>Extension "Surround with Tag": <a class="red" href="https://marketplace.visualstudio.com/items?itemName=BalduinLandolt.surround-with-tag">https://marketplace.visualstudio.com/items?itemName=BalduinLandolt.surround-with-tag</a></li></ul>
+
+<h2>Tehtävälista</h2>
+
+<p>Toivomusten tynnyrihän on loputon, mutta se saa nyt odottaa aikaa parempaa. Kirjoitan kuitenkin tähän muistiin suunnitelmat, niin 
+    eivät pääse unohtumaan, jos tulee tauko koodauksessa.
+</p>
+
+<ul id="todo">
+
+    <li>Dokumentaatio, dokumentaatio, dokumentaatio. JavaScript-tiedostoon pitää vähän lisäillä kommentteja sen toiminnasta, 
+        tyylitiedostot pitää ehdottomasti kommentoida (minimissään layout.css, joka on pisin) ja kun kerran koodi on julkista, niin 
+        varmaan README-tiedostonkin pitäisi olla jotenkin informatiivinen. Tunnen itseni ja tiedän, että jos katson css-tiedostoja 
+        kolmen kuukauden päästä, minulla ei enää ole harmainta aavistustakaan siitä, miksi esimerkiksi
+        <span class="monospace">iframe.centered</span> on olemassa (se kuuluu <a class="red" href="pirtanauha.html">taustatietosivuun</a>, ei
+        itse laskuriin).
+    </li>
+
+    <li>Laskuria ei ole testattu kännykällä eikä edes tabletilla eikä sitä ole erityisesti tehty responsiiviseksi. Sen pitäisi periaatteessa toimia, mutta voi olla, että esimerkiksi
+    taustakuva kannattaisi ehkä ottaa pois, jos näytön leveys on pienempi kuin x pikseliä.</li>
+
+    <li>Ulkonäköä voisi vielä viilata. Käytettävän loimen pituuden voisi merkitä paremmin, ehkä lihavoinnilla tai huomiovärillä
+        (kirkkaanpunainen varoitusväri jäi vielä käyttämättä), ja varmaan jotain muutakin voisi vielä säätää. Joskus tekstisyöte,
+        johon kirjoitetaan jotain jää valkoiseksi eikä saa asettamaani munankuorenväristä pohjaväriä, mutta se on aika pieni
+        kauneusvirhe.
+    </li>
+    
+    <li>Validaatio on testattu päällisin puolin ja sen <em>pitäisi</em> toimia riittävällä tarkkuudella, mutta olisi hyvä testailla
+    esimerkiksi raja-arvoilla.</li>
+
+    <li>Silloin tällöin langanpituuslaskuri tuottaa jänniä desimaalilukuja. Tiedän tämän johtuvan JavaScriptin tavasta käsitellä numeroita ja siitä, että jaan
+        sadalla, mutta se pitää fiksata jotenkin. Oikeastaan haluaisin pyöristää numerot aina ylöspäin lähimpään metriin, mutta se
+        osoittautui liian haasteelliseksi ja aikaavieväksi tähän väliin. Peruspyöristäminen on helppoa, mutta nyt pitäisi pyöristää 
+        nimenomaan aina ylös, koska ketään ei naurata, jos lanka loppuu 30 cm ennen kuin loimi on valmis.
+    </li>
+
+    <li>Olisiko kuitenkin kiva, että värivalinnan voisi tehdä paletista tai jopa vapaasti isosta taulusta? Se ratkaisisi validaatio-ongelmat kätevästi, mutta
+        toisaalta silloin mittataulukko olisi aina pakko tulostaa väreissä. Jos käytetään rajattua palettia, käyttäjä joutuu myös joskus
+        tekemään kompromisseja (nimim. kokemusta on). Jos värin nimen saa kirjoittaa itse, voi kutsua sitä vaikka persikanvihreäksi, jos haluaa.
+        Tai jos ei ole varma siitä, mitä värejä haluaa käyttää, voi vaikka laskea ne vain nimillä "kuviolangat" ja "taustalangat" tai "väri1"
+        ja "väri2".<br>
+        Löysin aika kivan komponentin, jota voisi käyttää palettiin, mutta päätin kuitenkin jättää tällä kertaa väliin:
+        <a class="red" target="_blank" href="https://www.cssscript.com/swatch-color-picker/">Swatchy.js</a>. Voi olla, että
+        otan sen käyttöön sitten, kun ymmärrän sen toiminnan paremmin ja osaan säätää sitä. Kun selviää, <em>mitä</em> se oikeasti
+        tuottaa, voi sen jonkin sitten siirtää värineliönä tulostaulukkoonkin. Juuri nyt ei ymmärrys ehkä vielä riitä.
+    </li>
+
+    <li>Laskurin loppuun voisi liittää vielä yhden lisälaskurin. Oikein hyvä koodaaja ymppäisi sen tulostaulukkoon, mutta en tiedä,
+        viitsinkö. Se voisi kuitenkin laskea, että jos lankaa on vaikka 440 metriä 100 grammassa, niin montako grammaa rankaa tarvitaan 
+        vaikka 36 metriin. Siinäkin voisi joko käyttää samaa numeroa koko ajan tai sitten jos tekisi oikein hienon, voisi asettaa 
+        langan painon jokaiselle värille erikseen. Siinäkin voi vielä tehdä hankalasti niin, että paino ilmoitetaan joko 50 grammalle tai 
+        100 grammalle tai sitten niin, että pistää käyttäjän laskemaan sen itse aina 100 grammalle.<br>
+        Luulen, että tämä onnistuisi taulukkomuodossakin minulta, kun peruskoodi on olemassa, mutta ihan nyt tähän väliin en jaksa sen 
+        kanssa askarrella. Ehkä kesällä tai jotain.
+    </li>
+
+</ul>
+
+
+<h2>Tuotantokäyttöön?</h2>
+
+<p>Olen vakavasti sitä mieltä, että laskuri tulee tuotantokäyttöön. Minulla on tekeillä pirtanauhaa käsittelevä sivusta pirtanauha.blog,
+    mutta se on WordPressin palvelussa eikä tällä hetkellä ostamani Personal-paketti tue JavaScriptiä. Saattaa olla, että päivitän 
+    palvelupaketin muista syistä ja silloin saan laskurinkin tuonne.<br>
+    Toinen vaihtoehto on tuupata laskuri nyörihaarukkasivustolleni lucet.fi, joka tarvitsee epätoivoisesti ulkonäköremontin. Sivuston 
+    on käsin koodattu eikä palvelinhotellilla ole mitään JavaScriptiä vastaan, joten sinne laskuri olisi helppo tipauttaa. Sille voisi 
+    vaikka tehdä oman tyylitiedoston pirtanauha.blogia mukaellen (kun ensin saan siellä päätettyä, mitä teen) ja linkittää sieltä 
+    takaisin pirtanauhasivustolle. Tämä olisi myös hyvä pika/väliaikaisratkaisu, voisin laittaa nyt tehdyn laskurin ja sen tyylitiedostot 
+    ihan suoraan tuonne vaikka saman tien.
+</p>
+
+<p>Vähän ajattelin, että kun tämä lopullinen tehtäväversio on valmis annan laskurin osoitteen yhteiskudontaryhmässä ja sanon, 
+    että saa testata. Olemme juuri saaneet valituksin mallin tämän kevään poimitun pirtanauhan yhteiskudontaan, joten loimen 
+    luominen alkaa olla ajankohtainen asia itse kullakin. Minä nyt varmaan vetäisen rullalangasta pöydän pituisen loimen mitään 
+    menekkiä laskematta, mutta jollakulla muulla voi olla tarve tarkistaa, riittääkö lanka vai pitääkö mennä kauppaan.
+</p>
+
+<hr>
+
+<p class="footer">&copy; Mari Voipio 2023, mari.voipio@lucet.fi</p>
+
+    
+</body>
+</html>

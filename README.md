@@ -1,7 +1,7 @@
 # laskuri
 Laskuri pirtanauhaloimelle
 
-I did not copy any code as such and only some css,
+I copied very little code as such and only some css,
 but I checked LOTS of things online. These are the sources I used.
 
 
@@ -10,6 +10,8 @@ Web development (HTML+CSS)
     HTML, CSS checked at: https://www.w3schools.com/
     Font Awesome icon usage tip: https://www.w3schools.com/css/css_icons.asp
     Icons: https://fontawesome.com/docs/web/add-icons/how-to
+    Top 10 Sans-Serif Fonts Used by Web Designers in 2022: https://wplook.com/top-sans-serif-fonts/
+    Roboto download page and usage instructions: https://fonts.google.com/specimen/Roboto
     Forms in tables: https://www.geeksforgeeks.org/how-to-use-tables-to-structure-forms/
     How to add icons in the button in HTML? https://www.geeksforgeeks.org/how-to-add-icons-in-the-button-in-html/
     Two buttons side by side: https://stackoverflow.com/questions/52544089/how-to-create-two-html-buttons-side-by-side
@@ -18,10 +20,8 @@ Web development (HTML+CSS)
 
 
 Javascript
-    shopping.js in course materials
     parseInt tip: https://www.tutorialspoint.com/javascript-plus-sign-concatenates-instead-of-giving-sum
-    assigning value 0 to empty checkbox: https://www.freecodecamp.org/news/javascri
-    Printing, resetting from W3 Schoolspt-check-empty-string-checking-null-or-empty-in-js/
+    Check empty string: https://www.freecodecamp.org/news/javascript-check-empty-string-checking-null-or-empty-in-js/
     copy to clipboard: https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
     Making a paragraph appear or disappear on click: https://www.sean.co.uk/a/webdesign/javascript_hide_reveal_appear_disappear.shtm
     Inserting a row at the bottom of the table: https://linuxhint.com/add-row-to-html-table-using-javascript/
